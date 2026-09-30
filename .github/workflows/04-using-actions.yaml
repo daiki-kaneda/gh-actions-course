@@ -1,0 +1,23 @@
+name: 04 - Using Actions
+
+on: push
+
+jobs: 
+    build: 
+        runs-on: ubuntu-latest
+        steps: 
+            - name: Checkout Code
+              uses: actions/checkout@7
+            - name: Printing Folders
+              run: ls
+
+
+# "2010-09-09"node-version: '20.x' -> node-version: '24.x'
+
+# actions/checkout@v4 -> actions/checkout@v7
+
+# actions/setup-node@v4 -> actions/setup-node@v6
+
+# 0. リポジトリからコードをチェックアウトする
+# 1. Reactアプリケーションの依存関係をインストールする
+# 2. 自動化されたテストを実行
