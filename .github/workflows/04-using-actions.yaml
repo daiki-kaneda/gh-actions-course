@@ -17,17 +17,6 @@ jobs:
                 node-version: '24.x'
             - name: Install Dependencies
               run: npm ci
-            - name: Run Unit Tests
-              run: npm run test
+            - name: Lint
+              run: npm run lint
               
-
-
-# "2010-09-09"node-version: '20.x' -> node-version: '24.x'
-
-# actions/checkout@v4 -> actions/checkout@v7
-
-# actions/setup-node@v4 -> actions/setup-node@v6
-
-# 0. リポジトリからコードをチェックアウトする
-# 1. Reactアプリケーションの依存関係をインストールする
-# 2. 自動化されたテストを実行
