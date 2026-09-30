@@ -8,8 +8,13 @@ jobs:
         steps: 
             - name: Checkout Code
               uses: actions/checkout@v7
-            - name: Printing Folders
-              run: ls
+            - name: Setup Node
+              uses: actions/setup-node@v6
+              with: 
+                node-version: '24.x'
+            - name: Install Dependencies
+              run: npm ci
+              working-directory: 04-using-actions/react-app
 
 
 # "2010-09-09"node-version: '20.x' -> node-version: '24.x'
