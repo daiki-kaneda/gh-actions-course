@@ -2,7 +2,6 @@ name: 08 - Using Varaibles
 
 on: 
     workflow_dispatch:
-    push:
 env: 
     WORKFLOW_VAR: "I am a workflow env var"
     OVERWRITTEN: "I am overwritten"
