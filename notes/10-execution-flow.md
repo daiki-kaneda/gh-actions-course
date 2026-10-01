@@ -22,3 +22,5 @@ jobs:
     job4:
         needs: job1
 ```
+
+> ```continue-on-error: true```で依存関係のあるジョブでエラーが起きてもダウンストリームのジョブを実行する
