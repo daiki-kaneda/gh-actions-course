@@ -19,3 +19,7 @@ steps:
     - run: xxx
 ```
 > ifを使いすぎると可読性が低くなるので注意する
+
+**メモ**
+- ```<truthy value> && x```はxになる
+- ```<falthy value> || x ```はxになる
