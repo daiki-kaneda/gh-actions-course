@@ -28,7 +28,11 @@ jobs:
                 echo "output2=value2" >> "$GITHUB_OUTPUT"
                 echo "output3=value3" >> "$GITHUB_OUTPUT"
                 cat "$GITHUB_OUTPUT"
-                echo "mistake=true" >> "$GITHUB_OUTPUT"
+                echo "mistake=true" > "$GITHUB_OUTPUT"
+                cat "$GITHUB_OUTPUT"
+            - name: Mistake step
+              run: |
+                echo "mistake=true" > "$GITHUB_OUTPUT"
                 cat "$GITHUB_OUTPUT"
 
     deploy:
