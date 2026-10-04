@@ -16,7 +16,36 @@ on:
                 default: 24.x
 
 jobs:
-    build:
+    install-deps:
+        defaults:
+            run:
+                working-directory: 13-caching/react-app
+        runs-on: ubuntu-latest
+        outputs:
+            deps-cache-key: ${{steps.cache-key.outputs.CACHE_KEY}}
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v7
+            - name: Setup node
+              uses: actions/setup-node@v6
+              with:
+                node-version: ${{inputs.node-version}}
+            - name: Calculate cache key
+              id: cache-key
+              run: |
+                echo "CACHE_KEY=deps-node-modules-${{hashFiles('13-caching/react-app/package-lock.json')}}" >> "$GITHUB_OUTPUT"
+            - name: Donwload cached dependencies
+              if: inputs.use-cache
+              id: cache
+              uses: actions/cache@v6
+              with:
+                path: 13-caching/react-app/node_modules
+                key: ${{steps.cache-key.outputs.CACHE_KEY}}
+            - name: Install dependencies
+              if: steps.cache.outputs.cache-hit != 'true'
+              run: npm ci
+    lint-test:
+        needs: install-deps
         defaults:
             run:
                 working-directory: 13-caching/react-app
@@ -34,7 +63,7 @@ jobs:
               uses: actions/cache@v6
               with:
                 path: 13-caching/react-app/node_modules
-                key: deps-node-modules-${{hashFiles('13-caching/react-app/package-lock.json')}}
+                key: ${{needs.install-deps.outputs.deps-cache-key}}
             - name: Install dependencies
               if: steps.cache.outputs.cache-hit != 'true'
               run: npm ci
@@ -42,17 +71,36 @@ jobs:
               run: npm run lint
             - name: Testing
               run: echo "Testing"
+
+    build:
+        needs: 
+            - install-deps
+            - lint-test
+        defaults:
+            run:
+                working-directory: 13-caching/react-app
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v7
+            - name: Setup node
+              uses: actions/setup-node@v6
+              with:
+                node-version: ${{inputs.node-version}}
+            - name: Donwload cached dependencies
+              if: inputs.use-cache
+              id: cache
+              uses: actions/cache@v6
+              with:
+                path: 13-caching/react-app/node_modules
+                key: ${{needs.install-deps.outputs.deps-cache-key}}
+            - name: Install dependencies
+              if: steps.cache.outputs.cache-hit != 'true'
+              run: npm ci
             - name: Building
               run: npm run build
             - name: Deploying to nonprod
               run: echo "Deploying to nonprod"
 
-
-
-# 1.コードをチェックアウト
-# 2.dependencyをインストール
-# 3.Linting
-# 4.Building
-# 5.Deploy non prod
 
 
