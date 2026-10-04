@@ -1,0 +1,43 @@
+name: 13 - Working With Caching
+
+on: 
+    workflow_dispatch:
+        inputs:
+            use-cache:
+                description: Whether to execute cache step
+                type: boolean
+                default: true
+
+jobs:
+    build:
+        defaults:
+            run:
+                working-directory: 13-caching/react-app
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v7
+            - name: Setup node
+              uses: actions/setup-node@v6
+              with:
+                node-version: '24.x'
+            - name: Install dependencies
+              run: npm ci
+            - name: Linting
+              run: npm run lint
+            - name: Testing
+              run: echo "Testing"
+            - name: Building
+              run: npm run build
+            - name: Deploying to nonprod
+              run: echo "Deploying to nonprod"
+
+
+
+# 1.コードをチェックアウト
+# 2.dependencyをインストール
+# 3.Linting
+# 4.Building
+# 5.Deploy non prod
+
+
