@@ -23,3 +23,7 @@ jobs:
 - ubuntu-latest-26
 - windows-latest-24
 - windows-latest-26
+
+**メモ**
+- strategy.fail-fastをtrueにすると一つのジョブが失敗したら他の全てのジョブも中断させる(デフォルトでtrue)
+- includeで実行パターンを拡張できる
