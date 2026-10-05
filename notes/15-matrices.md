@@ -30,4 +30,4 @@ jobs:
   - 存在しないキーを追加すると、全てのパターンに追加される
   - includeの中のパターンは後のものが優先される
 - excludeでパターンを排除できる
-  - excludeはincludeより前に実行される
+  - **excludeはincludeより前に実行される**
