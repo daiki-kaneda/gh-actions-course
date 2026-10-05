@@ -28,3 +28,6 @@ jobs:
 - strategy.fail-fastをtrueにすると一つのジョブが失敗したら他の全てのジョブも中断させる(デフォルトでtrue)
 - includeで実行パターンを拡張できる
   - 存在しないキーを追加すると、全てのパターンに追加される
+  - includeの中のパターンは後のものが優先される
+- excludeでパターンを排除できる
+  - excludeはincludeより前に実行される

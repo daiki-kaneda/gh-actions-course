@@ -16,6 +16,8 @@ jobs:
                     - node-version: 26.x
                       os: ubuntu-latest
                       tag: experimental
+                exclude:
+                    - opacity: 75
         runs-on: ${{matrix.os}}
         steps: 
             - name: Setup node
