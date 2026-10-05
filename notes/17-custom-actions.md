@@ -6,8 +6,14 @@ Custom Action...再利用可能なロジックを作る仕組み
 一般的な要件| - action.yamlファイルが必須<br> -他のリポジトリと共有したい場合は、自分自身のリポジトリで使わなければいけない | - acntion.yamlファイルが必須<br> -他のリポジトリと共有したい場合は、自分自身のリポジトリで使わなければいけない  |  - action.yamlが必須　<br> -他のリポジトリと共有したい場合は、自分自身のリポジトリで使わなければいけない|
 
 メモ
-- 処理の内容はaction.yamlに書き、using:キーワードでアクションのタイプを以下の様に指定する
+- どのタイプでも処理の内容はaction.yamlに書き、using:キーワードでアクションのタイプを以下の様に指定する
   - using: composite
   - using: node<version>
   - using: 'docker'
-- actions/@checkout
+- Compositeアクションを使う時は
+  - runsブロックでusing: compositeとする
+  - runsブロックにsteps:を作り、各処理をかく
+- JSアクションを使う時は、
+  - 必要なnode_modulesもpushする必要がある
+  - runsブロックでusing: node24の様に書く必要がある
+  - runsにmainブロックを作りmain: index.jsの様にエントリポイントを指定する
