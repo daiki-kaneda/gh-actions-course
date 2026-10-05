@@ -10,3 +10,4 @@ Custom Action...再利用可能なロジックを作る仕組み
   - using: composite
   - using: node<version>
   - using: 'docker'
+- actions/@checkout
