@@ -1,0 +1,29 @@
+name: Cache Node and NPM Dependencies
+description: package-lock.jsonファイルに基づいて、NodeおよびNPMの依存関係をキャッシュするアクション。
+inputs:
+  node-version:
+    description: NodeJS version to use
+    default: 24.x
+    required: true
+  working-dir:
+    description: The working directory of application
+    default: .
+    required: false
+runs:
+  using: composite # composite Actionsを使うと明示
+  steps:
+    - name: Setup NodeJS version ${{inputs.node-version}}
+      uses: actions/setup-nodejs@v6
+      with:
+        node-version: ${{inputs.node-version}}
+    - name: Cache Dependencies
+      id: cache
+      uses: actions/cache@v6
+      with:
+        path: ${{inputs.working-dir}}/node_modules
+        key: node-modules-${{hashFiles('${{inputs.working-dir}}/package-lock.json')}}
+    - name: Install Dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: npm ci
+      shell: bash
+      working-directory: ${{inputs.working-dir}}
