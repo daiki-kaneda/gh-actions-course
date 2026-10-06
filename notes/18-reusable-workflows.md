@@ -8,3 +8,11 @@ Reusable Workflow...ワークフローを再利用する仕組み
 - 他のリポジトリのワークフローは以下の様に使う
   - ```uses: <owner>/<repo>/.github/workflows/<workflow_name>@<version>```
   - 例:```uses: daiki-kaneda/gh-actions-course-example-e2e/.github/workflows/e2e.yaml@main```
+- 呼び出される側のワークフローのcheckoutでは,自分自身のrepositoryやbranchなどを指定しないといけない
+  ```
+- name: Checkout code
+uses: actions/checkout@v7
+with:
+repository: daiki-kaneda/gh-actions-course-example-e2e
+ref: main
+  ```
