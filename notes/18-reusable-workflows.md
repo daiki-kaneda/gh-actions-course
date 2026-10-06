@@ -5,3 +5,6 @@ Reusable Workflow...ワークフローを再利用する仕組み
 - reusable-deployアクションを使用して実行
 - 他のリポジトリに共有したい場合は、${{github.GH_PAT}}としてパーソナルアクセストークンの使用を明示する必要がある
 - 呼び出し側のワークフロー、呼び出されるワークフローのそれぞれのenv,varなどのコンテキストは共有されない（inputなどを使用する必要がある）
+- 他のリポジトリのワークフローは以下の様に使う
+  - ```uses: <owner>/<repo>/.github/workflows/<workflow_name>@<version>```
+  - 例:```uses: daiki-kaneda/gh-actions-course-example-e2e/.github/workflows/e2e.yaml@main```
