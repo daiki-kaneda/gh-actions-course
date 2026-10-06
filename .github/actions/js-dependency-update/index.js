@@ -2,6 +2,7 @@ const core = require('@actions/core')
 
 async function run(params) {
     /*
+    [WIP]
     1. Parse inputs:
         1.1 base-branch for which to check for updates
         1.2 target-branch to use to create the PR
